@@ -24,6 +24,7 @@ async function main() {
     .on("login", async (user) => {
       chatGPTBot.setBotName(user.name());
       console.log(`User ${user} logged in`);
+      console.log(`是否禁用群聊: ${config.disableGroupMessage}`);
       console.log(`私聊触发关键词: ${config.chatPrivateTriggerKeyword}`);
       console.log(`已设置 ${config.blockWords.length} 个聊天关键词屏蔽. ${config.blockWords}`);
       console.log(`已设置 ${config.chatgptBlockWords.length} 个ChatGPT回复关键词屏蔽. ${config.chatgptBlockWords}`);
