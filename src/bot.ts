@@ -193,6 +193,7 @@ export class ChatGPTBot {
     text: string
   ): boolean {
     return (
+      talker.self() ||
       // TODO: add doc support
       !(messageType == MessageType.Text || messageType == MessageType.Audio) ||
       talker.name() === "微信团队" ||
@@ -235,6 +236,9 @@ export class ChatGPTBot {
       const topic = await room.topic()
       console.log(`🚪 Room: ${topic} 🤵 Contact: ${talker.name()} 💬 Text: ${rawText}`)
     }
+
+    console.log(`Ralker Name: ${talker.name()}`);
+    
     if (this.isNonsense(talker, messageType, rawText)) {
       return;
     }
