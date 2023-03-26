@@ -230,6 +230,7 @@ export class ChatGPTBot {
     const room = message.room();
     const messageType = message.type();
     const privateChat = !room;
+    
     if (privateChat) {
       console.log(`🤵 Contact: ${talker.name()} 💬 Text: ${rawText}`)
     } else {
@@ -237,8 +238,6 @@ export class ChatGPTBot {
       console.log(`🚪 Room: ${topic} 🤵 Contact: ${talker.name()} 💬 Text: ${rawText}`)
     }
 
-    console.log(`Ralker Name: ${talker.name()}`);
-    
     if (this.isNonsense(talker, messageType, rawText)) {
       return;
     }
