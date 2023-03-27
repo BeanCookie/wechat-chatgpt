@@ -42,6 +42,9 @@ export class ChatGPTBot {
   get chatGroupTriggerRegEx(): RegExp {
     return new RegExp(`^@${this.botName}\\s`);
   }
+  get wechatLimitRegEx(): RegExp {
+    return new RegExp(`^@发送消息过于频繁\\s`);
+  }
   get chatPrivateTriggerRule(): RegExp | undefined {
     const { chatPrivateTriggerKeyword, chatTriggerRule } = this;
     let regEx = chatTriggerRule
@@ -152,6 +155,9 @@ export class ChatGPTBot {
     }
     let message = mesasge;
     while (message.length > SINGLE_MESSAGE_MAX_SIZE) {
+      if (this.wechatLimitRegEx.test(message)) {
+        continue
+      }
       messages.push(message.slice(0, SINGLE_MESSAGE_MAX_SIZE));
       message = message.slice(SINGLE_MESSAGE_MAX_SIZE);
     }
